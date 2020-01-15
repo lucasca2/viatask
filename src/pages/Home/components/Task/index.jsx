@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MdDone, MdClose, MdEdit } from "react-icons/md";
+import { MdDone, MdClose, MdEdit, MdDelete } from "react-icons/md";
 
 // Styles
 import {
@@ -18,7 +18,8 @@ import {
 export default function Task({
   task,
   bordered,
-  handleClickDone
+  handleClickDone,
+  handleRemoveTask
 }) {
   return (
     <Wrapper bordered={bordered}>
@@ -30,10 +31,13 @@ export default function Task({
         ) : (
           <Label color={"danger"}>A Fazer</Label>
         )}
-
-
       </Content>
       <Actions>
+        <Tooltip data-tooltip={"Remover esta tarefa"} data-position={"top"}>
+          <ActionButton onClick={handleRemoveTask} backgroundColor={"danger"}>
+            <MdDelete />
+          </ActionButton>
+        </Tooltip>
         {!task?.done && (
           <Link to={`/task/${task?.id}`} data-tooltip={"Editar esta tarefa"} data-position={"top"}>
             <ActionButton backgroundColor={"secondary"}>

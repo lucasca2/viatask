@@ -19,6 +19,11 @@ export const Actions = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  
+  @media (max-width: 650px) {
+    width: 100%;
+    justify-content: flex-end;
+  }
 `;
 
 export const Label = styled.span`

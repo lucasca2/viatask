@@ -24,6 +24,7 @@ export default createGlobalStyle`
   
   html, body, #root {
     min-height: 100%;
+    overflow-x: hidden;
   }
   
   body {
@@ -39,6 +40,12 @@ export default createGlobalStyle`
   a {
     text-decoration: none;
     color: ${styles.colors.default.black};
+  }
+  
+  @media (max-width: 650px) {
+    * {
+      cursor: default !important;
+    }
   }
   
   ::-webkit-input-placeholder {

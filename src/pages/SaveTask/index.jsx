@@ -1,4 +1,5 @@
 import React, { useMemo, useState, useEffect } from 'react';
+import uuid from 'uuid/v4';
 import { MdArrowBack } from "react-icons/md";
 import { useParams } from 'react-router-dom';
 
@@ -48,16 +49,30 @@ export default function SaveTask() {
     history.replace('/');
   }
 
+  /**
+   * Function para salvar a tarefa na listagem
+   */
   function handleSaveTask() {
-    dispatch(saveTask({
-      id,
-      title,
-      description,
-      date: '15/01/2020',
-      done: false,
-    }));
+    if(id) {
+      dispatch(saveTask({
+        id,
+        title,
+        description,
+        date: '15/01/2020',
+        done: false,
+      }));
+    } else {
+      dispatch(saveTask({
+        id: uuid(),
+        title,
+        description,
+        date: '15/01/2020',
+        done: false,
+      }));
+    }
 
-    history.replace('/');
+
+    handleGoBack();
   }
 
   return (

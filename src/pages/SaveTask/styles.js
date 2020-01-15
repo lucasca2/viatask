@@ -40,6 +40,11 @@ export const WrapperActions = styled.div`
   padding: ${styles.metrics.baseSpacing.medium};
   display: flex;
   justify-content: flex-end;
+  
+  @media (max-width: 650px) {
+    flex-wrap: wrap;
+    flex-direction: column-reverse;
+  }
 `;
 
 const BaseButton = styled.button`
@@ -57,6 +62,11 @@ const BaseButton = styled.button`
   &:hover {
     opacity: .75;
   }
+  
+  @media (max-width: 650px) {
+    width: 100%;
+    margin: ${styles.metrics.baseSpacing.small} 0;
+  }
 `;
 
 export const SaveButton = styled(BaseButton)`
@@ -70,6 +80,7 @@ export const CancelButton = styled(BaseButton)`
 `;
 
 export const BackButton = styled.button`
+  background-color: transparent;
   border: none;
   padding: ${styles.metrics.baseSpacing.medium};
   

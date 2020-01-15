@@ -1,22 +1,38 @@
 export const initialValues = {
-  tasks: [
-    { id: '1', title: 'Layout', description: 'Criar layout do sistema de teste', date: '15/01/2020', done: false },
-    { id: '2', title: 'Código do sistema', description: 'Criar layout do sistema de teste', date: '15/01/2020', done: false },
-    { id: '3', title: 'Tarefa com descrição bem grande', description: 'Criar layout do sistema de teste, Criar layout do sistema de teste, Criar layout do sistema de teste, Criar layout do sistema de teste, Criar layout do sistema de teste, Criar layout do sistema de teste', date: '15/01/2020', done: false },
-  ],
+  tasks: JSON.parse(localStorage.getItem('@tasks')) || [],
+};
+
+export const refreshStorage = (tasks) => {
+  localStorage.setItem('@tasks', JSON.stringify(tasks));
 };
 
 export const Types = {
   SAVE: "SAVE_TASK",
+  REMOVE: "REMOVE_TASK"
 };
 
 export const reducer = (state, action) => {
   switch (action.type) {
-    case Types.SAVE:
+    case Types.SAVE: {
+      const newTasks = [  action.task, ...state.tasks.filter(t => t.id !== action.task.id) ];
+
+      refreshStorage(newTasks);
+
       return {
         ...state,
-        tasks: [ ...state.tasks.filter(t => t.id !== action.task.id), action.task ],
+        tasks: newTasks,
       };
+    }
+    case Types.REMOVE: {
+      const newTasks = [ ...state.tasks.filter(t => t.id !== action.task.id) ];
+
+      refreshStorage(newTasks);
+
+      return {
+        ...state,
+        tasks: newTasks,
+      };
+    }
     default:
       return state;
   }
@@ -24,21 +40,13 @@ export const reducer = (state, action) => {
 
 export const Actions = {
   save: ({ task }) => ({ type: Types.SAVE, task }),
+  remove: ({ task }) => ({ type: Types.REMOVE, task }),
 };
 
 export const saveTask = (task) => {
   return Actions.save({ task });
 };
 
-// export const ActionModals = {
-//   openModalWebsiteLocked: ({ days }) =>
-//     Actions.open({
-//       modal: "ModalWebsiteLocked",
-//       props: { days }
-//     }),
-//   openModalWebsiteUnlocked: ({ dateEnd, urlSite }) =>
-//     Actions.open({
-//       modal: "ModalWebsiteLocked",
-//       props: { dateEnd, urlSite }
-//     })
-// };
+export const removeTask = (task) => {
+  return Actions.remove({ task });
+};

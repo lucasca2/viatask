@@ -6,4 +6,7 @@ export const Content = styled.main`
   margin: 0 auto;
   padding: ${styles.metrics.baseSpacing.ultraLarge};
 
+  @media (max-width: 650px) {
+    padding: ${styles.metrics.baseSpacing.ultraLarge} ${styles.metrics.baseSpacing.medium};
+  }
 `;
