@@ -1,5 +1,6 @@
 const defaultColors = {
   white: '#F1F1F1',
+  whiteDarken: '#A0A0A0',
   black: '#101010',
 
   primary: '#4DA747',
@@ -16,6 +17,7 @@ const defaultColors = {
 
 const revertColors = {
   white: defaultColors.black,
+  whiteDarken: defaultColors.black,
   black: defaultColors.white,
 
   primary: defaultColors.secondary,
@@ -35,6 +37,7 @@ export default {
   revert: revertColors,
 
   background: defaultColors.secondary,
+  placeholder: defaultColors.whiteDarken,
   border: defaultColors.white,
   input: defaultColors.white,
 };

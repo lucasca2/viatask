@@ -6,8 +6,13 @@ import logo from 'static/logo.svg';
 
 export const Wrapper = styled.header`
   width: 100%;
-  padding: 15px 25px;
   border-bottom: 1px solid ${styles.colors.border};
+`;
+
+export const Content = styled.div`
+  max-width: ${styles.metrics.maxWidth};
+  margin: 0 auto;
+  padding: ${styles.metrics.baseSpacing.medium} ${styles.metrics.baseSpacing.ultraLarge};
 `;
 
 export const Logo = styled.img.attrs({

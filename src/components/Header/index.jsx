@@ -3,13 +3,16 @@ import React from 'react';
 //Styles
 import {
   Wrapper,
+  Content,
   Logo
 } from './styles';
 
 export default function Header() {
   return (
     <Wrapper>
-      <Logo />
+      <Content>
+        <Logo />
+      </Content>
     </Wrapper>
   )
 };

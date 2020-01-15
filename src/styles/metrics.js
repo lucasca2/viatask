@@ -11,6 +11,8 @@ const metrics = {
   baseRadius: '4px',
   baseBorder: 1,
   baseShadow: '0px 0px 5px rgba(0, 0, 0, .15)',
+
+  maxWidth: '1200px'
 };
 
 export default metrics;

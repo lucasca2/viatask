@@ -14,7 +14,7 @@ export default createGlobalStyle`
     box-sizing: border-box;
   }
   
-  input, button, a {
+  input, button, a, textarea {
     outline: none;
   }
   
@@ -31,7 +31,7 @@ export default createGlobalStyle`
     color: ${styles.colors.default.text};
   }
   
-  body, input, button {
+  body, input, button, textarea {
     font-family: "Poppins", Helvetica, sans-serif;
     font-size: 14px;
   }
@@ -55,5 +55,69 @@ export default createGlobalStyle`
   
   :-ms-input-placeholder {  
      color: ${styles.colors.placeholder};  
+  }
+  
+  [data-tooltip] {
+    display: inline-block;
+    position: relative;
+    
+    &::after {
+      pointer-events: none;
+      padding: 10px 15px;
+      text-align: center;
+      content: attr(data-tooltip);
+      font-size: 12px;
+      line-height: 18px;
+      position: absolute;
+      background: #272727;
+      border-radius: 4px;
+      color: #fff;
+      white-space: pre; /* or pre-wrap */
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .2s, visibility .2s;
+      will-change: opacity, visibility;
+    }
+    
+    &::before {
+      content: '';
+      position: absolute;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      transform: translateX(-50%) scale(1);
+      left: 50%;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .2s, visibility .2s;
+      will-change: opacity, visibility;
+    }
+    
+    &:hover::after,
+    &:hover::before {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+  
+  [data-position="top"]::after {
+    transform: translateX(-50%) scale(1);
+    left: 50%;
+    bottom: calc(100% + 8px);
+  }
+  
+  [data-position="top"]::before {
+    border-top: 8px solid #272727;
+    bottom: 100%;
+  }
+  
+  [data-position="bottom"]::after{
+    transform: translateX(-50%) scale(1);
+    left: 50%;
+    top: calc(100% + 8px);
+  }
+  
+  [data-position="bottom"]::before {
+    border-bottom: 8px solid #272727;
+    top: 100%;    
   }
 `;
