@@ -1,18 +1,19 @@
 Primeiramente certifique-se que o Node esteja instalado em seu computador.
 
-Rodar o projeto
+## Rodar o projeto
+
 Dentro do diretório do projeto rode o comando para instalar as dependências
 
-npm install
-
+`npm install` 
+   
 ou apenas
-
-yarn
+    
+`yarn`
 
 Com as dependências instaladas, resta apenas rodar o comando para iniciar o servidor
 
-npm run start
+`npm run start`
 
 ou
 
-yarn start
+`yarn start`
