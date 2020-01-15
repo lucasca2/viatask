@@ -12,7 +12,7 @@ export const Wrapper = styled.header`
 export const Content = styled.div`
   max-width: ${styles.metrics.maxWidth};
   margin: 0 auto;
-  padding: ${styles.metrics.baseSpacing.medium} ${styles.metrics.baseSpacing.ultraLarge};
+  padding: ${styles.metrics.baseSpacing.regular} ${styles.metrics.baseSpacing.ultraLarge};
 `;
 
 export const Logo = styled.img.attrs({
