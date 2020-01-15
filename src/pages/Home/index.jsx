@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
-import { MdDone, MdClose, MdDashboard } from "react-icons/md";
+import moment from "moment";
+import { MdDone, MdClose } from "react-icons/md";
 
 // Components
 import Task from './components/Task';
@@ -20,11 +21,28 @@ import {
   AddButton
 } from './styles'
 
+
+/**
+ * Function para ordenar as tarefas por data
+ * @param a
+ * @param b
+ * @returns {number}
+ */
+export const sortByDate = (a, b) => {
+  console.log(a, b);
+  if(moment(a.date) > moment(b.date)) return -1;
+  if(moment(a.date) < moment(b.date)) return 1;
+
+  return 0;
+};
+
 export default function Home() {
   const [{ tasks }, dispatch] = useTaskState();
 
-  const tasksTodo = useMemo(() => tasks?.filter(t => !t.done), [tasks]);
-  const tasksDoned = useMemo(() => tasks?.filter(t => t.done), [tasks]);
+  const sortedTasks = tasks.sort(sortByDate);
+
+  const tasksTodo = useMemo(() => sortedTasks?.filter(t => !t.done), [sortedTasks]);
+  const tasksDoned = useMemo(() => sortedTasks?.filter(t => t.done), [sortedTasks]);
 
   /**
    * Function para definir tarefa como concluída/a fazer

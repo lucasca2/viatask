@@ -78,5 +78,5 @@ export const Date = styled.span`
   line-height: 1.75em;
   color: ${styles.colors.placeholder};
   letter-spacing: 2.5px;
-  font-size: ${styles.fonts.sizes.small};
+  font-size: ${styles.fonts.sizes.ultraSmall};
 `;

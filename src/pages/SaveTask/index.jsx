@@ -1,5 +1,6 @@
 import React, { useMemo, useState, useEffect } from 'react';
 import uuid from 'uuid/v4';
+import moment from 'moment';
 import { MdArrowBack } from "react-icons/md";
 import { useParams } from 'react-router-dom';
 
@@ -15,6 +16,7 @@ import {
   Title,
   Form,
   Label,
+  Error,
   Input,
   WrapperActions,
   SaveButton,
@@ -24,23 +26,21 @@ import {
 
 export default function SaveTask() {
   const [{ tasks }, dispatch] = useTaskState();
-
   const { id } = useParams();
+  const currentTask = tasks.find(t => t.id === id);
+
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [errors, setErrors] = useState(null);
 
   const titleForm = useMemo(() => id ? 'Editar Tarefa' : 'Cadastrar Tarefa', [id]);
 
   useEffect(() => {
     if(id) {
-      const currentTask = tasks.find(t => t.id === id);
-
-      console.log(currentTask);
-
       setTitle(currentTask?.title);
       setDescription(currentTask?.description);
     }
-  }, [id]);
+  }, [id, currentTask]);
 
   /**
    * Function para voltar para listagem
@@ -52,13 +52,17 @@ export default function SaveTask() {
   /**
    * Function para salvar a tarefa na listagem
    */
-  function handleSaveTask() {
+  async function handleSaveTask() {
+    if(!title) await setErrors(e => ({ ...e, title: 'Você precisa preencher o título' }));
+    if(!description) await setErrors(e => ({ ...e, description: 'Você precisa preencher a descrição' }));
+
+    if(!title || !description) return;
+
     if(id) {
       dispatch(saveTask({
-        id,
+        ...currentTask,
         title,
         description,
-        date: '15/01/2020',
         done: false,
       }));
     } else {
@@ -66,7 +70,7 @@ export default function SaveTask() {
         id: uuid(),
         title,
         description,
-        date: '15/01/2020',
+        date: moment(),
         done: false,
       }));
     }
@@ -81,22 +85,32 @@ export default function SaveTask() {
       <Title color={"text"}>{titleForm}</Title>
       <Form>
         <Label>
-          título da tarefa
+          Título da tarefa
           <Input
+            error={errors?.title}
             placeholder={"Digite um título para sua tarefa"}
             value={title}
-            onChange={e => setTitle(e?.target?.value)}
+            onChange={e => {
+              setTitle(e?.target?.value);
+              setErrors(e => ({ ...e, title: undefined }));
+            }}
           />
+          {errors?.title && <Error>{errors?.title}</Error>}
         </Label>
         <Label>
-          descrição da tarefa
+          Descrição da tarefa
           <Input
+            error={errors?.description}
             placeholder={"Digite uma descrição para sua tarefa"}
             value={description}
-            onChange={e => setDescription(e?.target?.value)}
+            onChange={e => {
+              setDescription(e?.target?.value);
+              setErrors(e => ({ ...e, description: undefined }));
+            }}
             rows={4}
             as={"textarea"}
           />
+          {errors?.description && <Error>{errors?.description}</Error>}
         </Label>
       </Form>
       <WrapperActions>

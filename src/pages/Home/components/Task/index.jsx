@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { MdDone, MdClose, MdEdit, MdDelete } from "react-icons/md";
 
@@ -24,7 +25,7 @@ export default function Task({
   return (
     <Wrapper bordered={bordered}>
       <Content>
-        <Date>{task?.date}</Date>
+        <Date>CRIADO: {moment(task?.date).format('DD/MM/YYYY hh:mm')}</Date>
         <Title>{task?.title}</Title>
         {task?.done ? (
           <Label color={"success"}>Concluído</Label>

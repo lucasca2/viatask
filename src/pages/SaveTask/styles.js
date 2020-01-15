@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import styles from 'styles';
 
 export const Title = styled.h2`
@@ -26,14 +26,24 @@ export const Label = styled.label`
   padding: ${styles.metrics.baseSpacing.medium}; 
 `;
 
+export const Error = styled.span`
+  font-size: ${styles.fonts.sizes.ultraSmall};
+  padding-top: ${styles.metrics.baseSpacing.small}; 
+  color: ${styles.colors.default.danger};
+`;
+
 export const Input = styled.input`
-  border: none;
   margin-top: ${styles.metrics.baseSpacing.small};
   border-radius: ${styles.metrics.baseRadius};
   background-color: ${styles.colors.input};
+  border: 1px solid ${styles.colors.input};
   padding: ${styles.metrics.baseSpacing.medium};
   
   resize: vertical;
+  
+  ${p => p.error && css`
+    border: 1px solid ${styles.colors.default.danger};
+  `}
 `;
 
 export const WrapperActions = styled.div`
@@ -83,6 +93,7 @@ export const BackButton = styled.button`
   background-color: transparent;
   border: none;
   padding: ${styles.metrics.baseSpacing.medium};
+  margin-bottom: ${styles.metrics.baseSpacing.ultraLarge};
   
   display: flex;
   align-items: center;
